@@ -5,13 +5,22 @@ namespace application\controllers;
 
 
 use application\core\Controller;
+use application\lib\Pagination;
+use application\models\Admin;
 
 class MainController extends Controller
 {
 
   public function indexAction()
   {
-    $this->view->render('Главная страница');
+
+    $pagination = new Pagination($this->route, $this->model->postsCount());
+
+    $vars = [
+      'pagination' => $pagination->get(),
+      'list' => $this->model->postsList($this->route),
+    ];
+    $this->view->render('Главная страница', $vars);
   }
 
   public function aboutAction()
@@ -21,7 +30,14 @@ class MainController extends Controller
 
   public function postAction()
   {
-    $this->view->render('Блог');
+    $adminModel = new Admin();
+    if (!$adminModel->isPostExist($this->route['id'])) {
+      $this->view->errorCode(404);
+    }
+    $vars = [
+      'data' => $adminModel->postData($this->route['id'])[0],
+    ];
+    $this->view->render('Блог', $vars);
   }
 
   public function contactAction()
@@ -35,5 +51,6 @@ class MainController extends Controller
     }
     $this->view->render('Контакты');
   }
+
 
 }

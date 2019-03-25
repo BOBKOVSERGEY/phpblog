@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 22 2019 г., 16:48
+-- Время создания: Мар 25 2019 г., 11:28
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.10
 
@@ -40,13 +40,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `name`, `description`, `text`) VALUES
-(12, 'Бобков Сергей', 'тестовая категория22222222222222', '222222222222222'),
-(13, 'Бобков Сергей', 'eeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'),
-(14, 'Бобков Сергей', 'eeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'),
-(15, 'eeeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeeeeeeeee'),
-(16, 'eeeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeee', 'eeeeeeeeeeeeeeeeeeeeeeeeeeee'),
-(17, 'Бобков Сергей', 'ddddddddddddddddddddd', 'ddddddddddddddddddd'),
-(18, 'Бобков Сергей', 'ddddddddddddddddddddd', 'ddddddddddddddddddd');
+(21, 'Some', 'Some', 'Someddddddddddddddddddd');
 
 --
 -- Индексы сохранённых таблиц
@@ -66,7 +60,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

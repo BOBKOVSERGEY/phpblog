@@ -4,11 +4,11 @@
       <div class="card-header">Посты</div>
       <div class="card-body">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-md-12">
             <?php if (empty($list)): ?>
               <p>Список постов пуст</p>
             <?php else: ?>
-              <table class="table">
+              <table class="table table-responsive" style="width: 100%">
                 <tr>
                   <th>Название</th>
                   <th>Редактировать</th>

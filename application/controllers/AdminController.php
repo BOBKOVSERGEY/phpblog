@@ -5,6 +5,8 @@ namespace application\controllers;
 
 
 use application\core\Controller;
+use application\lib\Pagination;
+use application\models\Main;
 
 class AdminController extends Controller
 {
@@ -60,23 +62,50 @@ class AdminController extends Controller
 
   public function editAction()
   {
+    if (!$this->model->isPostExist($this->route['id'])) {
+      $this->view->errorCode(404);
+    }
+
+
+
     if (!empty($_POST)) {
       if (!$this->model->postValidate($_POST, 'edit')) {
         $this->view->message('error', $this->model->error);
       }
-      $this->view->message('success', 'Ok');
+      $this->model->postEdit($_POST, $this->route['id']);
+      if ($_FILES['img']['tmp_name']) {
+        $this->model->postUploadImg($_FILES['img']['tmp_name'], $this->route['id']);
+      }
+      $this->view->message('success', 'Сохранено');
     }
-    $this->view->render('Редактировать пост');
+
+    $vars = [
+      'data' => $this->model->postData($this->route['id'])[0],
+    ];
+
+    $this->view->render('Редактировать пост', $vars);
   }
 
   public function deleteAction()
   {
-    debug($this->route);
-    //$this->view->render('Добавить пост');
+    if (!$this->model->isPostExist($this->route['id'])) {
+      $this->view->errorCode(404);
+    }
+
+    $this->model->postDelete($this->route['id']);
+    $this->view->redirect('/admin/posts');
+
   }
 
   public function postsAction()
   {
-    $this->view->render('Список постов');
+    $mainModel = new Main();
+    $pagination = new Pagination($this->route, $mainModel->postsCount());
+
+    $vars = [
+      'pagination' => $pagination->get(),
+      'list' => $mainModel->postsList($this->route),
+    ];
+    $this->view->render('Список постов', $vars);
   }
 }
